@@ -1,0 +1,46 @@
+﻿@model Domain.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "For Helen";
+}
+
+
+<div class="container">
+    
+    <div class="span4" style="text-align:center">   
+        <img src="~/Content/images/Hot.jpg" />
+        </div>
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-signin", @role = "form" }))
+        {
+
+
+            @Html.TextBoxFor(m => m.YourName, new {@class = "form-control", @placeholder = "Just your first name...", @autofocus = ""})            
+
+            <div class="help-block">
+                <p>@Html.ValidationMessageFor(m => m.YourName)</p>
+            </div>
+
+            <div class="input-group date" data-date="27/03/1983" data-date-format="dd/MM/yyyy">
+                @Html.TextBoxFor(m => m.DateOfBirth, new {@class = "form-control", @placeholder = "When were you born?"})  
+                @*<input class="form-control" type="text" placeholder="When were you born?">*@
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            <div class="help-block">
+                <p>@Html.ValidationMessageFor(m => m.DateOfBirth)</p>
+            </div>
+            
+            if (Model.Message != null)
+            {
+            <div class="help-block">
+                <p>@Html.DisplayFor(m => m.Message)</p>
+            </div>
+            }
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        }
+    
+
+
+</div>
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Domain.Entities.Picture>
+
+@{
+    ViewBag.Title = "Pictures of you...";
+}
+
+<div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            if (i == 0)
+            {
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            }
+            else
+            {
+                <li data-target="#myCarousel" data-slide-to="@i"></li>
+            }            
+        }
+    </ol>
+    <div class="carousel-inner">
+                  
+        <div class="item active">            
+            <img src="data:image;base64,@Convert.ToBase64String(Model.First().Image)" />
+
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Why I love Helen...</h1>                              
+                </div>
+            </div>
+        </div>
+
+        @for (int i = 1; i < Model.Count(); i++)
+        {
+            <div class="item">                                
+                <img src="data:image;base64,@Convert.ToBase64String(Model.ElementAt(i).Image)" />                
+                <div class="container">
+                    <div class="carousel-caption">
+                        <p>@Model.ElementAt(i).Description</p>                        
+                    </div>                                        
+                </div>
+            </div>
+        }
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>  
+</div>
+
+<p>
+    @Html.ActionLink("Add more", "Create")
+</p>
